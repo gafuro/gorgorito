@@ -67,9 +67,9 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
-    public function getAvatarAttr()
+    public function getAvatarAttr($pixels = 40)
     {
-        return "https://i.pravatar.cc/40?u=" . $this->email;
+        return "https://i.pravatar.cc/$pixels?u=" . $this->email;
     }
 
 }

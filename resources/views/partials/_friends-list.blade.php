@@ -2,17 +2,19 @@
 <ul>
     @foreach(auth()->user()->follows as $user)
         <li class="mb-4">
-            <div class="flex items-center text-sm">
-                <img
-                    src="{{ $user->getAvatarAttr() }}"
-                    alt="Avatar name"
-                    class="rounded-full mr-2"
-                />
-                @if ($user->id == auth()->user()->id)
-                    By me
-                @else
-                    {{ $user->name }}
-                @endif
+            <div>
+                <a href="{{ route('profile',$user) }}" class="flex items-center test-sm">
+                    <img
+                        src="{{ $user->getAvatarAttr() }}"
+                        alt="Avatar name"
+                        class="rounded-full mr-2"
+                    />
+                    @if ($user->id == auth()->user()->id)
+                        By me
+                    @else
+                        {{ $user->name }}
+                    @endif
+                </a>
             </div>
         </li>
     @endforeach
