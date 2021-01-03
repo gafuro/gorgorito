@@ -31,6 +31,7 @@ class ProfilesController extends Controller
                     Rule::unique('users')->ignore($user)
                 ],
                 'name' => ['string', 'required', 'max:255'],
+                'avatar' => ['file'],
                 'email' => [
                     'string',
                     'required',
@@ -40,6 +41,8 @@ class ProfilesController extends Controller
                 'description' => ['string', 'required'],
                 'password' => ['string', 'required', 'min:8', 'max:255', 'confirmed']
             ]);
+
+        $attributes['avatar'] = \request('avatar')->store('avatars');
 
         $attributes['password'] = Hash::make($attributes['password']);
 

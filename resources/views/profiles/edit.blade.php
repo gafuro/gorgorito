@@ -1,6 +1,6 @@
 <x-app>
     Edit profile {{ $user->name }}
-    <form method="post" action="{{ route('update_profile',$user) }}">
+    <form method="post" action="{{ route('update_profile',$user) }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="mb-6">
@@ -31,6 +31,26 @@
             />
             @error('username')
                 <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+            @enderror
+        </div>
+        <div class="mb-6">
+            <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="avatar">
+                Avatar
+            </label>
+            <div class="flex">
+                <input class="border border-gray-400 p-2 w-full"
+                       type="file"
+                       name="avatar"
+                       id="avatar"
+                       required
+                />
+                <img src="{{ $user->avatar }}"
+                     width="40px"
+                     alt="User's avatar"
+                />
+            </div>
+            @error('avatar')
+            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-6">

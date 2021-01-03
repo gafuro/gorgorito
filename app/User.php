@@ -15,9 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'username', 'name', 'description', 'email', 'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -54,9 +52,9 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class)->latest();
     }
 
-    public function getAvatarAttr($pixels = 40): string
+    public function getAvatarAttribute($value)
     {
-        return "https://i.pravatar.cc/$pixels?u=" . $this->email;
+        return asset('storage/'.$value);
     }
 
     public function path(?string $profilePath = 'profile'): string

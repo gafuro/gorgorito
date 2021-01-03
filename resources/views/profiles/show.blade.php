@@ -8,7 +8,7 @@
                 alt="user_banner"
             />
             <img
-                src="{{ $user->getAvatarAttr(150) }}"
+                src="{{ $user->avatar }}"
                 alt="Avatar name"
                 class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2"
                 width="150px"
