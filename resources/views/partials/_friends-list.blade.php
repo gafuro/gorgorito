@@ -5,8 +5,9 @@
             <div>
                 <a href="{{ $user->path() }}" class="flex items-center test-sm">
                     <img
-                        src="{{ $user->getAvatarAttr() }}"
-                        alt="Avatar name"
+                        src="{{ $user->avatar }}"
+                        alt="{{$user->name}} name"
+                        width="40px;"
                         class="rounded-full mr-2"
                     />
                     @if ($user->id == auth()->user()->id)

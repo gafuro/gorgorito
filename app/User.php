@@ -52,14 +52,19 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class)->latest();
     }
 
-    public function getAvatarAttribute($value)
+    public function getAvatarAttribute($value): string
     {
-        return asset('storage/'.$value);
+        return asset($value ? 'storage/' . $value : '/images/no_avatar.png');
     }
 
     public function path(?string $profilePath = 'profile'): string
     {
         return route($profilePath, $this->id);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
     }
 
 }

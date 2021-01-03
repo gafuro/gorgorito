@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profiles/{user}', 'ProfilesController@update')
         ->name('update_profile')
         ->middleware('can:edit,user');
+
+    Route::get('/explore', 'ExploreController@index')->name('explore');
 });
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
