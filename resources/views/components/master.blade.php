@@ -26,11 +26,9 @@
 <div id="app">
     <section class="px-8 py-4">
         <header class="container mx-auto">
-            <a href="/">
-                <h1>
-                    <img src="/images/logo.png" alt="{{ config('app.name', 'Logo') }}">
-                </h1>
-            </a>
+            <h1>
+                <img src="/images/logo.png" alt="{{ config('app.name', 'Logo') }}">
+            </h1>
         </header>
     </section>
 
