@@ -113,10 +113,11 @@
         <div class="mb-6">
             <button
                 type="submit"
-                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-4"
             >
                 Edit changes
             </button>
+            <a href="{{ $user->path() }}" class="hover:bg-blue-800 underline">Cancel</a>
         </div>
 
     </form>

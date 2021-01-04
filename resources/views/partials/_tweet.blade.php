@@ -1,13 +1,12 @@
-
 <div class="flex p-4 {{ $loop->last ? '' : 'border-b border-gray-200' }}">
     <div class="mr-2 flex-shrink-0">
         <a href="{{ $tweet->user->path()  }}">
-        <img
-            src="{{ $tweet->user->avatar }}"
-            alt="Avatar name"
-            width="40px;"
-            class="rounded-full mr-2"
-        /></a>
+            <img
+                src="{{ $tweet->user->avatar }}"
+                alt="Avatar name"
+                width="40px;"
+                class="rounded-full mr-2"
+            /></a>
     </div>
     <div>
         <a href="{{ $tweet->user->path()  }}">
@@ -16,5 +15,6 @@
         <p class="text-sm">
             {{ $tweet->body }}
         </p>
+        <x-like-button :tweet="$tweet" />
     </div>
 </div>

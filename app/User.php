@@ -45,6 +45,7 @@ class User extends Authenticatable
 
         return Tweet::whereIn('user_id', $this->follows()->pluck('id'))
             ->orWhere('user_id', $this->id)
+            ->withLikes()
             ->latest()
             ->paginate($tweetsQtt);
     }
@@ -67,6 +68,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 
 }
