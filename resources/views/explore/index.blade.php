@@ -1,5 +1,4 @@
 <x-app>
-    Explore view
     <div>
         @forelse($users as $user)
             <div class="flex items-center mb-5">

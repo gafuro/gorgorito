@@ -11,7 +11,7 @@
 
         <hr class="my-4" />
 
-        <footer class="flex justify-between">
+        <footer class="flex justify-between items-center">
             <img
                 src="{{ auth()->user()->avatar }}"
                 alt="User's Avatar"
@@ -20,7 +20,7 @@
             />
 
             <button type="submit"
-                    class="bg-blue-500 rounded-lg shadow py-2 px-2 text-white">
+                    class="bg-blue-500 rounded rounded-lg shadow py-2 px-10 text-white hover:bg-blue-600 text-sm">
                 Gor-a-bit!
             </button>
         </footer>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tweet;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -9,9 +10,11 @@ use Illuminate\Validation\Rule;
 
 class ProfilesController extends Controller
 {
+    const PAGINATION = 5;
+
     public function show(User $user)
     {
-        return view('profiles.show', compact('user'));
+        return view('profiles.show', ['user'=> $user, 'tweets' => $user->timeline()]);
     }
 
     public function edit(User $user)
@@ -42,7 +45,7 @@ class ProfilesController extends Controller
                 'password' => ['string', 'required', 'min:8', 'max:255', 'confirmed']
             ]);
 
-        if(\request('avatar')){
+        if (\request('avatar')) {
             $attributes['avatar'] = \request('avatar')->store('avatars');
         }
 

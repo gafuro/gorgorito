@@ -15,7 +15,7 @@
                 </div>
 
                 @if (auth()->check())
-                    <div class="lg:w-1/6 bg-blue-100 rounded-lg p-4">
+                    <div class="lg:w-1/6 bg-gray-200 border-gray-300 rounded-lg p-4">
                         @include('partials._friends-list')
                     </div>
                 @endif

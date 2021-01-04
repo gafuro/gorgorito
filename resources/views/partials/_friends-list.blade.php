@@ -1,7 +1,7 @@
 <h3 class="font-bold text-xl mb-4">Following</h3>
 <ul>
     @forelse(auth()->user()->follows as $user)
-        <li class="mb-4">
+        <li class="{{ $loop->last ? '' : 'mb-4' }}">
             <div>
                 <a href="{{ $user->path() }}" class="flex items-center test-sm">
                     <img

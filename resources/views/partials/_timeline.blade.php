@@ -4,4 +4,5 @@
     @empty
         <p class="p-4">Nothing to show! What are you thinking?</p>
     @endforelse
+    {{ $tweets->links() }}
 </div>

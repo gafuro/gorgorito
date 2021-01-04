@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable, Followable;
 
+    const TWEETS_PER_PAGE = 5;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function timeline()
+    public function timeline(?int $tweetsQtt = self::TWEETS_PER_PAGE)
     {
         if (!$this->id) {
             return Tweet::latest()->get();
@@ -44,7 +46,7 @@ class User extends Authenticatable
         return Tweet::whereIn('user_id', $this->follows()->pluck('id'))
             ->orWhere('user_id', $this->id)
             ->latest()
-            ->get();
+            ->paginate($tweetsQtt);
     }
 
     public function tweets(): \Illuminate\Database\Eloquent\Relations\HasMany

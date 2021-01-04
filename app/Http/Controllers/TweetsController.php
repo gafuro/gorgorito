@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class TweetsController extends Controller
 {
+    const PAGINATION = 5;
+
     public function index()
     {
         return view('tweets.index',
