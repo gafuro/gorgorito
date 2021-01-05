@@ -20,7 +20,6 @@ trait Likeable
         FROM likes
         GROUP BY tweet_id";
         $builder->leftJoinSub($sQuery, 'likes', 'likes.tweet_id', 'tweets.id');
-
     }
 
     public function likes()
@@ -40,10 +39,17 @@ trait Likeable
             ->count();
     }
 
-    public function like($liked = true, ?User $user = null)
+    public function like($liked = true, ?User $user = null):void
     {
+        $user = empty($user) ? auth()->user() : $user;
+
+        if ($this->isLikedBy($user, $liked)) {
+            $this->likes()->where('user_id', $user->id)->delete();
+            return;
+        }
+
         $this->likes()->updateOrCreate([
-            'user_id' => $user ? $user->id : auth()->id()], [
+            'user_id' => $user->id], [
             'liked' => $liked
         ]);
     }
