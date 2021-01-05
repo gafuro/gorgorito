@@ -22,12 +22,12 @@ trait Likeable
         $builder->leftJoinSub($sQuery, 'likes', 'likes.tweet_id', 'tweets.id');
     }
 
-    public function likes()
+    public function likes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Like::class);
     }
 
-    public function isLikedBy(?User $user = null, $liked = true)
+    public function isLikedBy(?User $user = null, $liked = true): bool
     {
         if (!$user) {
             $user = auth()->user();

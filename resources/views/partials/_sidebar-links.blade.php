@@ -19,10 +19,10 @@
             Welcome
         </a>
     </li>
-    <li>
-        <form action="/logout" method="POST">
-            @csrf
-            <button class="font-bold text-lg" type="submit">Logout</button>
-        </form>
-    </li>
+{{--    <li>--}}
+{{--        <form action="/logout" method="POST">--}}
+{{--            @csrf--}}
+{{--            <button class="font-bold text-lg" type="submit">Logout</button>--}}
+{{--        </form>--}}
+{{--    </li>--}}
 </ul>

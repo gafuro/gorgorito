@@ -23,12 +23,4 @@ class FollowsController extends Controller
         return back();
 
     }
-
-    public function update(User $user)
-    {
-        auth()
-            ->user()
-            ->toggleFollow($user);
-        return back();
-    }
 }

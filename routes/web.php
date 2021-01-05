@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('can:edit,user');
 
     Route::get('/explore', 'ExploreController')->name('explore');
+    Route::get('/notifications', 'UserNotificationsController@show')->name('notifications');
 });
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');

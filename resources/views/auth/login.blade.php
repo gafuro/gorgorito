@@ -66,12 +66,12 @@
                             {{ __('Login') }}
                         </button>
 
-                        <a href="{{ route('password.request') }}" class="text-xs text-gray-700">
+                        <a href="{{ route('password.request') }}" class="text-xs text-gray-700 hover:text-blue-700">
                             {{ __('Forgot Your Password?') }}
                         </a>
                     </div>
                 </form>
-
+                <a href="{{route('register')}}" class="text-xs text-gray-700 hover:text-blue-700">Create an account</a>
             </div>
         </div>
     </div>
