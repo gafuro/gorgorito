@@ -5,36 +5,30 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
-use App\User;
 
 class FollowUserTest extends TestCase
 {
     use DatabaseMigrations, WithFaker, RefreshDatabase;
 
     /** @test */
-    function followedUsersGetNotification()
+    public function followedUsersGetNotification()
     {
-        $authUser = User::create([
-            'username' => $this->faker->userName,
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
-            'password' => Hash::make('password')
-        ]);
+        $this->withoutExceptionHandling();
+
+        $authUser = factory('App\User')->create();
 
         auth()->login($authUser);
 
-        $user2 = User::create([
-            'username' => $this->faker->userName,
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
-            'password' => Hash::make('password')
-        ]);
+        $user2 = factory('App\User')->create();
 
-        $this->post(route('follow',$user2));
+        $this->post(route('follow', $user2))->assertRedirect();
 
         $this->assertCount(1, $user2->notifications);
 
+        auth()->logout();
+        auth()->login($user2);
+
+        $this->get(route('notifications'))->assertSee('Somebody is now following you');
     }
 }
