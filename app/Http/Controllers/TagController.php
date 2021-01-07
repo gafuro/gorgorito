@@ -35,9 +35,8 @@ class TagController extends Controller
 
     public function update(Tag $tag)
     {
-        auth()
-            ->user()
-            ->follow($tag);
+        $tag->follow(auth()
+            ->user());
         return back();
 
     }

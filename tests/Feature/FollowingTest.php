@@ -32,8 +32,6 @@ class FollowingTest extends TestCase
 
         $this->actingAs($user2);
 
-        $this->get(route('notifications'))->assertSee('Somebody is now following you', 'notification page is working');
-
         $this->actingAs($user1);
 
         $this->post(route('unfollow', $user2))->assertRedirect();
@@ -52,11 +50,9 @@ class FollowingTest extends TestCase
 
         $this->actingAs($user1);
 
-        $user1->follow($tag);
+        $this->post(route('toggle_follow_tag', $tag))->assertRedirect();
 
-        $this->assertTrue($user1->isFollowing($tag));
-
-        $this->assertCount(1, $user1->follows, 'user get notification for subscription');
+        $this->assertTrue($tag->isFollowedBy($user1));
     }
 
 }

@@ -18,6 +18,13 @@ trait Followable
             ->exists();
     }
 
+    public function isFollowedBy(User $user): bool
+    {
+        return $this->followers()
+            ->where('user_id', $user->id)
+            ->exists();
+    }
+
     public function follows(): ?\Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->morphedByMany(User::class, 'followable')->withTimestamps();
@@ -25,14 +32,24 @@ trait Followable
 
     public function follow($entity): \Illuminate\Database\Eloquent\Model
     {
-        if($entity instanceof User){
+        if($this instanceof User ){
             $entity->notify(new Followed($entity->username));
+            return $this->follows()->save($entity);
         }
-        return $this->follows()->save($entity);
+        return $this->followers()->save($entity);
     }
 
     public function unfollow($entity): int
     {
-        return $this->follows()->detach($entity);
+        if($this instanceof User ){
+            return $this->follows()->detach($entity);
+        }
+        return $this->followers()->detach($entity);
     }
+
+    public function followers(): \Illuminate\Database\Eloquent\Relations\MorphToMany
+    {
+        return $this->morphToMany(User::class, 'followable')->withTimestamps();
+    }
+
 }

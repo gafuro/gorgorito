@@ -40,7 +40,7 @@
                     <button class="text-sm font-medium bg-red-100 py-1 px-2 rounded text-green-500 align-middle hover:text-red-500">
                         {{$tag->name}}
                     </button>
-                    @if (auth()->user()->isFollowing($tag))
+                    @if ($tag->isFollowedBy(auth()->user()))
                         Following this trend
                     @endif
                 </form>
