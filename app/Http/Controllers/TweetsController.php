@@ -20,11 +20,8 @@ class TweetsController extends Controller
     {
         $attributes = \request()->validate(['body' => 'required|max:255']);
 
-        Tweet::create([
-            'user_id' => auth()->id(),
-            'body' => $attributes['body']
-        ]);
+        $tweet = (new Tweet())->publish($attributes);
 
-        return redirect()->route('home');
+        return back();
     }
 }
