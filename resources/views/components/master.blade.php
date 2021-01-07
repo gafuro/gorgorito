@@ -32,36 +32,44 @@
                     </h1>
                     <div>
                         <ul class="flex flex-row items-center">
-                            <li class="mx-3">
-                                <a href="/notifications" class="flex items-center justify-between hover:text-blue-700">
-                                    Notifications
-                                    @php ($notificationCount = auth()->user()->unreadNotifications()->count())
-                                    <i class="fa fa-bell mr-1 w-3 font-weight-bold text-red-600 relative">
-                                        @if( boolval($notificationCount) )
-                                            <span
-                                                class="
-                                                absolute
-                                                bottom-0
-                                                top-1
-                                                left-3
-                                                text-white
-                                                border-2 border-red-500
-                                                rounded-full flex items-center justify-center font-mono
-                                                bg-black font-bold"
-                                            style="height: 1.25rem; width: 1.25rem; " >
-                                                {{ $notificationCount }}
-                                            </span>
-                                        @endif
-                                    </i>
-
-                                </a>
-                            </li>
-                            <li class="mx-3">
-                                <form action="/logout" method="POST">
-                                    @csrf
-                                    <button class="text-lg hover:text-blue-700" type="submit">Logout</button>
-                                </form>
-                            </li>
+                            @if(auth()->user())
+                                <li>
+                                    <a
+                                        class="text-lg hover:text-blue-700"
+                                        href="{{ route('edit_profile',auth()->user()->id) }}">
+                                        {{ auth()->user()->name }}
+                                    </a>
+                                </li>
+                                <li class="mx-3">
+                                    <a href="/notifications" class="flex items-center justify-between hover:text-blue-700">
+                                        Notifications
+                                        @php ($notificationCount = auth()->user()->unreadNotifications()->count())
+                                        <i class="fa fa-bell mr-1 w-3 font-weight-bold text-red-600 relative">
+                                            @if( boolval($notificationCount) )
+                                                <span
+                                                    class="
+                                                    absolute
+                                                    bottom-0
+                                                    top-1
+                                                    left-3
+                                                    text-white
+                                                    border-2 border-red-500
+                                                    rounded-full flex items-center justify-center font-mono
+                                                    bg-black font-bold"
+                                                style="height: 1.25rem; width: 1.25rem; " >
+                                                    {{ $notificationCount }}
+                                                </span>
+                                            @endif
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="mx-3">
+                                    <form action="/logout" method="POST">
+                                        @csrf
+                                        <button class="text-lg hover:text-blue-700" type="submit">Logout</button>
+                                    </form>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </header>

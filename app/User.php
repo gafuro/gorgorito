@@ -75,4 +75,14 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'followable');
+    }
+
+    public function tags()
+    {
+        return $this->morphedByMany(Tag::class, 'followable');
+    }
+
 }

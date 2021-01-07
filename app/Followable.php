@@ -5,33 +5,34 @@ namespace App;
 
 use App\Notifications\Followed;
 use App\User;
+use App\Tag;
 
 trait Followable
 {
 
-    public function isFollowing(User $user): bool
+    public function isFollowing($entity): bool
     {
         return $this->follows()
-            ->where('following_user_id', $user->id)
+            ->where('followable_id', $entity->id)
+            ->where('followable_type', get_class($entity))
             ->exists();
     }
 
     public function follows(): ?\Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        if (!$this->id) {
-            return null;
+        return $this->morphedByMany(User::class, 'followable')->withTimestamps();
+    }
+
+    public function follow($entity): \Illuminate\Database\Eloquent\Model
+    {
+        if($entity instanceof User){
+            $entity->notify(new Followed($entity->username));
         }
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+        return $this->follows()->save($entity);
     }
 
-    public function follow(User $user): \Illuminate\Database\Eloquent\Model
+    public function unfollow($entity): int
     {
-        $user->notify(new Followed($user->username));
-        return $this->follows()->save($user);
-    }
-
-    public function unfollow(User $user): int
-    {
-        return $this->follows()->detach($user);
+        return $this->follows()->detach($entity);
     }
 }

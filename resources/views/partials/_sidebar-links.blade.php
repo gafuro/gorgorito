@@ -19,6 +19,11 @@
             Welcome
         </a>
     </li>
+    <li>
+        <a href="/tags" class="font-bold text-lg mb-4 block">
+            Tags
+        </a>
+    </li>
 {{--    <li>--}}
 {{--        <form action="/logout" method="POST">--}}
 {{--            @csrf--}}

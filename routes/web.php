@@ -37,8 +37,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/explore', 'ExploreController')->name('explore');
     Route::get('/notifications', 'UserNotificationsController@show')->name('notifications');
+
+    Route::get('/tags', 'TagController@index')->name('tags');
+    Route::post('/tags', 'TagController@store')->name('new_tag');
+    Route::post('/tags/{tag}/toggle-follow', 'TagController@update')->name('toggle_follow_tag');
 });
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
+
 
 Auth::routes();
