@@ -14,7 +14,7 @@ php artisan migrate:fresh --seed
 
 #QUEUE
 php artisan queue:restart
-php artisan queue:work --tries=3
+php artisan queue:work --queue="high,default_name" --tries=3
 php artisan queue:retry 1
 
 #TINKER

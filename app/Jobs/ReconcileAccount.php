@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 Use App\User;
+Use App\Notifications\Welcome;
 use function GuzzleHttp\Promise\exception_for;
 
 class ReconcileAccount implements ShouldQueue
@@ -26,7 +27,6 @@ class ReconcileAccount implements ShouldQueue
      */
     public function __construct(User $user)
     {
-
         $this->user = $user;
     }
 
@@ -37,6 +37,6 @@ class ReconcileAccount implements ShouldQueue
      */
     public function handle()
     {
-        logger("Hey! ".$this->user->name.", let's be friends");
+        $this->user->notify(new Welcome());
     }
 }

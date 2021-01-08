@@ -41,13 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/tags', 'TagController@index')->name('tags');
     Route::post('/tags', 'TagController@store')->name('new_tag');
     Route::post('/tags/{tag}/toggle-follow', 'TagController@update')->name('toggle_follow_tag');
-
-
-    Route::get('/test', function () {
-
-        App\Jobs\ReconcileAccount::dispatch(auth()->user());
-        return 'Job done';
-    });
 });
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
