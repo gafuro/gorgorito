@@ -63,3 +63,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Logo
 
 red #ec4c4c, blue #8dcaff
+
+#REDIS
+
+1.Restart the Redis server to make sure it is running:
+    sudo service redis-server restart
+2.Execute a simple Redis command to verify your Redis server is running and available:
+    redis-cli
+    set user:1 "Jane"
+    get user:1
+3.To stop your Redis server:
+    sudo service redis-server stop
