@@ -8,10 +8,9 @@ class UserNotificationsController extends Controller
 {
     public function show()
     {
+        auth()->user()->unreadNotifications->markAsRead();
         return view('notifications.show', [
             'notifications'=>auth()->user()->notifications
         ]);
     }
-
-    //todo mark notification as viewed
 }
